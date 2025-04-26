@@ -60,7 +60,8 @@ export default function SurveyQuoteForm() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
 
-        <div className="max-w-md mx-auto mt-10 p-6 border border-gray-200 rounded-xl text-center shadow-md animate-fade-in">
+       <div className="max-w-md mx-auto mt-10 p-6 border border-gray-200 rounded-xl text-center shadow-md animate-fade-in bg-gradient-to-br from-[#EAE4FB] to-white">
+
           <img src={logoUrl} alt="Logo" className="mx-auto mb-6 h-12" />
           <h2 className="text-xl font-bold text-[#312e81] mb-4">Thank you {firstName}!</h2>
           <p className="text-gray-700">
