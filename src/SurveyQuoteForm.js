@@ -68,9 +68,9 @@ export default function SurveyQuoteForm() {
           <p className="text-gray-700 mt-2">
             Thank you for your support, {firstName}.<br />Keep up the great work.
           </p>
-          <p className="text-lg font-semibold text-[#312e81] mt-4">
-            Estimated Survey Quote: £{quote} (incl. VAT)
-          </p>
+          <p className="text-lg font-semibold text-[#312e81] mt-6">Estimated Survey Quote:</p>
+          <div className="my-2 border-t border-gray-300 w-1/2 mx-auto"></div>
+          <p className="text-2xl font-bold text-[#312e81] mt-2">£{quote} (incl. VAT)</p>
           <button onClick={() => {
             setSubmitted(false);
             setFormData({
