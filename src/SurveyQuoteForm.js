@@ -59,9 +59,7 @@ export default function SurveyQuoteForm() {
     const firstName = formData.surveyor.split(' ')[0];
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
-
-       <div className="max-w-md mx-auto mt-10 p-6 border border-gray-200 rounded-xl text-center shadow-md animate-fade-in bg-gradient-to-br from-[#EAE4FB] to-white">
-
+        <div className="max-w-md mx-auto mt-10 p-6 border border-gray-200 rounded-xl text-center shadow-md animate-fade-in bg-gradient-to-br from-[#EAE4FB] to-white">
           <img src={logoUrl} alt="Logo" className="mx-auto mb-6 h-12" />
           <h2 className="text-xl font-bold text-[#312e81] mb-4">Thank you {firstName}!</h2>
           <p className="text-gray-700">
@@ -94,90 +92,92 @@ export default function SurveyQuoteForm() {
   }
 
   return (
-    <div className="font-sans max-w-md mx-auto px-4 py-6 sm:px-6 border border-gray-200 rounded-2xl shadow-md bg-gradient-to-br from-[#EAE4FB] to-white">
-      <img src={logoUrl} alt="Logo" className="mx-auto mb-8 h-12" />
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          name="name"
-          placeholder="Name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-          className="w-full px-4 py-2 sm:text-lg text-base border border-[#312e81] rounded"
-        />
-        <input
-          name="postcode"
-          placeholder="Postcode"
-          value={formData.postcode}
-          onChange={handleChange}
-          required
-          className="w-full px-4 py-2 border border-[#312e81] rounded"
-        />
-        <input
-          name="value"
-          placeholder="Value"
-          type="number"
-          value={formData.value}
-          onChange={handleChange}
-          required
-          className="w-full px-4 py-2 border border-[#312e81] rounded"
-        />
-        <input
-          name="email"
-          placeholder="Email"
-          type="email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-          className="w-full px-4 py-2 border border-[#312e81] rounded"
-        />
-        <input
-          name="phone"
-          placeholder="Phone Number"
-          value={formData.phone}
-          onChange={handleChange}
-          required
-          className="w-full px-4 py-2 border border-[#312e81] rounded"
-        />
-        <div className="pt-4 mt-4 border-t border-gray-300">
-          <select
-            name="surveyor"
-            value={formData.surveyor}
+    <div className="min-h-screen flex items-center justify-center bg-white">
+      <div className="font-sans max-w-md mx-auto px-4 py-6 sm:px-6 border border-gray-200 rounded-2xl shadow-md bg-gradient-to-br from-[#EAE4FB] to-white">
+        <img src={logoUrl} alt="Logo" className="mx-auto mb-8 h-12" />
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            name="name"
+            placeholder="Name"
+            value={formData.name}
             onChange={handleChange}
             required
-            className="w-full mt-4 px-4 py-2 border border-[#312e81] rounded"
+            className="w-full px-4 py-2 sm:text-lg text-base border border-[#312e81] rounded"
+          />
+          <input
+            name="postcode"
+            placeholder="Postcode"
+            value={formData.postcode}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-2 border border-[#312e81] rounded"
+          />
+          <input
+            name="value"
+            placeholder="Value"
+            type="number"
+            value={formData.value}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-2 border border-[#312e81] rounded"
+          />
+          <input
+            name="email"
+            placeholder="Email"
+            type="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-2 border border-[#312e81] rounded"
+          />
+          <input
+            name="phone"
+            placeholder="Phone Number"
+            value={formData.phone}
+            onChange={handleChange}
+            required
+            className="w-full px-4 py-2 border border-[#312e81] rounded"
+          />
+          <div className="pt-4 mt-4 border-t border-gray-300">
+            <select
+              name="surveyor"
+              value={formData.surveyor}
+              onChange={handleChange}
+              required
+              className="w-full mt-4 px-4 py-2 border border-[#312e81] rounded"
+            >
+              <option value="" disabled>Select Surveyor</option>
+              <option value="Adrian Watts">Adrian Watts</option>
+              <option value="Claire Austin">Claire Austin</option>
+              <option value="Clive Browne">Clive Browne</option>
+              <option value="Emmanuel Baker">Emmanuel Baker</option>
+              <option value="John Frost">John Frost</option>
+              <option value="Lyndsey Milburn">Lyndsey Milburn</option>
+              <option value="Mike King">Mike King</option>
+              <option value="Nicola James-David">Nicola James-David</option>
+              <option value="Rachel Farr-Drejer">Rachel Farr-Drejer</option>
+              <option value="Rob Crowe">Rob Crowe</option>
+              <option value="Robert Yates">Robert Yates</option>
+              <option value="Ruby Chand">Ruby Chand</option>
+              <option value="Stuart Bridgewater">Stuart Bridgewater</option>
+              <option value="Tim McCormick">Tim McCormick</option>
+              <option value="Tony Wyatt">Tony Wyatt</option>
+              <option value="Trevor Moffatt">Trevor Moffatt</option>
+              <option value="Tristan King">Tristan King</option>
+            </select>
+          </div>
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-[#312e81] text-white px-5 py-3 rounded hover:bg-[#252162]"
           >
-            <option value="" disabled>Select Surveyor</option>
-            <option value="Adrian Watts">Adrian Watts</option>
-            <option value="Claire Austin">Claire Austin</option>
-            <option value="Clive Browne">Clive Browne</option>
-            <option value="Emmanuel Baker">Emmanuel Baker</option>
-            <option value="John Frost">John Frost</option>
-            <option value="Lyndsey Milburn">Lyndsey Milburn</option>
-            <option value="Mike King">Mike King</option>
-            <option value="Nicola James-David">Nicola James-David</option>
-            <option value="Rachel Farr-Drejer">Rachel Farr-Drejer</option>
-            <option value="Rob Crowe">Rob Crowe</option>
-            <option value="Robert Yates">Robert Yates</option>
-            <option value="Ruby Chand">Ruby Chand</option>
-            <option value="Stuart Bridgewater">Stuart Bridgewater</option>
-            <option value="Tim McCormick">Tim McCormick</option>
-            <option value="Tony Wyatt">Tony Wyatt</option>
-            <option value="Trevor Moffatt">Trevor Moffatt</option>
-            <option value="Tristan King">Tristan King</option>
-          </select>
-        </div>
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-[#312e81] text-white px-5 py-3 rounded hover:bg-[#252162]"
-        >
-          {loading ? 'Sending...' : 'Submit'}
-        </button>
-      </form>
-      <p className="mt-6 text-sm text-[#312e81] text-center font-medium bg-indigo-50 border border-indigo-200 p-3 rounded-lg shadow-sm">
-        Upon submitting this information the homeowner will receive a bespoke quotation based on their property value. If they are happy with the quote, they can follow the booking link and pay online. Our customer service team will be in touch with proposed dates within 24 hours of booking.
-      </p>
+            {loading ? 'Sending...' : 'Submit'}
+          </button>
+        </form>
+        <p className="mt-6 text-sm text-[#312e81] text-center font-medium bg-indigo-50 border border-indigo-200 p-3 rounded-lg shadow-sm">
+          Upon submitting this information the homeowner will receive a bespoke quotation based on their property value. If they are happy with the quote, they can follow the booking link and pay online. Our customer service team will be in touch with proposed dates within 24 hours of booking.
+        </p>
+      </div>
     </div>
   );
 }
