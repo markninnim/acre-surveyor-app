@@ -58,7 +58,7 @@ export default function SurveyQuoteForm() {
   if (submitted) {
     const firstName = formData.surveyor.split(' ')[0];
     return (
-      <div className="min-h-screen flex flex-col bg-gradient-to-br from-[#EAE4FB] to-white">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#EAE4FB] to-white">
         <div className="font-sans w-full max-w-md mx-auto px-4 py-10 sm:px-6 text-center animate-fade-in">
           <img src={logoUrl} alt="Logo" className="mx-auto mb-6 h-12" />
           <h2 className="text-xl font-bold text-[#312e81] mb-4">Thank you {firstName}!</h2>
