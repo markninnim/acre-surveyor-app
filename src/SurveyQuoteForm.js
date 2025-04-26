@@ -58,8 +58,8 @@ export default function SurveyQuoteForm() {
   if (submitted) {
     const firstName = formData.surveyor.split(' ')[0];
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white">
-        <div className="max-w-md mx-auto mt-10 p-6 border border-gray-200 rounded-xl text-center shadow-md animate-fade-in bg-gradient-to-br from-[#EAE4FB] to-white">
+      <div className="min-h-screen flex flex-col bg-gradient-to-br from-[#EAE4FB] to-white">
+        <div className="font-sans w-full max-w-md mx-auto px-4 py-10 sm:px-6 text-center animate-fade-in">
           <img src={logoUrl} alt="Logo" className="mx-auto mb-6 h-12" />
           <h2 className="text-xl font-bold text-[#312e81] mb-4">Thank you {firstName}!</h2>
           <p className="text-gray-700">
@@ -92,8 +92,8 @@ export default function SurveyQuoteForm() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white">
-      <div className="font-sans max-w-md mx-auto px-4 py-6 sm:px-6 border border-gray-200 rounded-2xl shadow-md bg-gradient-to-br from-[#EAE4FB] to-white">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-[#EAE4FB] to-white">
+      <div className="font-sans w-full max-w-md mx-auto px-4 py-6 sm:px-6">
         <img src={logoUrl} alt="Logo" className="mx-auto mb-8 h-12" />
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
@@ -138,15 +138,18 @@ export default function SurveyQuoteForm() {
             required
             className="w-full px-4 py-2 border border-[#312e81] rounded"
           />
-          <div className="pt-4 mt-4 border-t border-gray-300">
+
+          <div className="my-4 border-t border-gray-300"></div>
+
+          <div>
             <select
               name="surveyor"
               value={formData.surveyor}
               onChange={handleChange}
               required
-              className="w-full mt-4 px-4 py-2 border border-[#312e81] rounded"
+              className="w-full px-4 py-2 sm:text-lg text-base border border-[#312e81] rounded h-12"
             >
-              <option value="" disabled>Select Surveyor</option>
+              <option value="" disabled>Your Name</option>
               <option value="Adrian Watts">Adrian Watts</option>
               <option value="Claire Austin">Claire Austin</option>
               <option value="Clive Browne">Clive Browne</option>
@@ -171,11 +174,11 @@ export default function SurveyQuoteForm() {
             disabled={loading}
             className="w-full bg-[#312e81] text-white px-5 py-3 rounded hover:bg-[#252162]"
           >
-            {loading ? 'Sending...' : 'Submit'}
+            {loading ? 'Sending...' : 'Request A Quote'}
           </button>
         </form>
         <p className="mt-6 text-sm text-[#312e81] text-center font-medium bg-indigo-50 border border-indigo-200 p-3 rounded-lg shadow-sm">
-          Upon submitting this information the homeowner will receive a bespoke quotation based on their property value. If they are happy with the quote, they can follow the booking link and pay online. Our customer service team will be in touch with proposed dates within 24 hours of booking.
+          Upon submitting this information the homeowner will receive a bespoke quotation based on their property value. If they are happy with the quote, they can follow the booking link and pay online.
         </p>
       </div>
     </div>
