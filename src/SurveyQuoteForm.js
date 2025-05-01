@@ -2,13 +2,16 @@ import { useState } from 'react';
 
 export default function SurveyQuoteForm() {
   const [formData, setFormData] = useState({
-    surveyor: '',
-    name: '',
-    postcode: '',
-    value: '',
-    email: '',
-    phone: '',
-  });
+ const [formData, setFormData] = useState({
+  first_name: '',
+  last_name: '',
+  postcode: '',
+  value: '',
+  email: '',
+  phone: '',
+  surveyor: '',
+});
+
 
   const [submitted, setSubmitted] = useState(false);
   const [quote, setQuote] = useState(null);
@@ -25,7 +28,7 @@ const handleSubmit = async (e) => {
   console.log('Submitting form:', formData);
 
   try {
-    // Calculate estimated quote
+    // Calculate quote
     const propertyValue = parseInt(formData.value, 10);
     let estimatedQuote;
     if (propertyValue <= 100000) estimatedQuote = 299;
@@ -46,30 +49,31 @@ const handleSubmit = async (e) => {
 
     setQuote(estimatedQuote);
 
-    // Prepare data for FluentCRM
-    const fullName = formData.full_name?.trim() || '';
-    const firstName = fullName.includes(' ') ? fullName.split(' ')[0] : fullName;
-
+    // Prepare CRM data (no full_name)
     const data = new FormData();
-    data.append('full_name', fullName);
-    data.append('first_name', firstName);
-    data.append('email', formData.email);
-    data.append('phone', formData.phone);
-    data.append('postcode', formData.postcode);
-    data.append('value', formData.value);
-    data.append('surveyor', formData.surveyor);
+data.append('first_name', formData.first_name);
+data.append('last_name', formData.last_name);
+data.append('email', formData.email);
+data.append('phone', formData.phone);
+data.append('postcode', formData.postcode);
+data.append('value', formData.value);
+data.append('surveyor', formData.surveyor);
 
-    console.log("Sending to CRM:", {
-      full_name: fullName,
-      first_name: firstName,
+
+    console.log('Sending to CRM:', {
+      first_name: formData.first_name,
+      last_name: formData.last_name,
       email: formData.email
     });
 
-    await fetch('https://acresurveying.co.uk/?fluentcrm=1&route=contact&hash=9d18b263-b9c2-44b5-8b0c-06b04b99e997', {
-      method: 'POST',
-      body: data,
-      mode: 'no-cors'
-    });
+    await fetch(
+      'https://acresurveying.co.uk/?fluentcrm=1&route=contact&hash=9d18b263-b9c2-44b5-8b0c-06b04b99e997',
+      {
+        method: 'POST',
+        body: data,
+        mode: 'no-cors'
+      }
+    );
 
     setSubmitted(true);
   } catch (err) {
@@ -79,6 +83,7 @@ const handleSubmit = async (e) => {
     setLoading(false);
   }
 };
+
 
 
   const logoUrl = "https://acresurveying.co.uk/wp-content/uploads/2025/02/acre-surveying-logo.png";
@@ -124,14 +129,25 @@ const handleSubmit = async (e) => {
       <div className="font-sans w-full max-w-md mx-auto px-4 sm:px-6">
         <img src={logoUrl} alt="Logo" className="mx-auto mb-8 h-12" />
         <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            name="name"
-            placeholder="Name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-2 sm:text-lg text-base border border-[#312e81] rounded"
-          />
+          <div className="flex space-x-4">
+  <input
+    name="first_name"
+    placeholder="First Name"
+    value={formData.first_name}
+    onChange={handleChange}
+    required
+    className="w-1/2 px-4 py-2 sm:text-lg text-base border border-[#312e81] rounded"
+  />
+  <input
+    name="last_name"
+    placeholder="Last Name"
+    value={formData.last_name}
+    onChange={handleChange}
+    required
+    className="w-1/2 px-4 py-2 sm:text-lg text-base border border-[#312e81] rounded"
+  />
+</div>
+
           <input
             name="postcode"
             placeholder="Postcode"
