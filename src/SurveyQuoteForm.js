@@ -53,6 +53,11 @@ const handleSubmit = async (e) => {
     // Create form data for FluentCRM webhook
     const data = new FormData();
     data.append('full_name', formData.full_name);
+    console.log("Full name submitted:", formData.full_name);
+const firstName = formData.full_name && formData.full_name.trim() !== ''
+  ? formData.full_name.trim().split(' ')[0]
+  : 'Customer';
+
     data.append('first_name', firstName);
     data.append('email', formData.email);
     data.append('phone', formData.phone);
