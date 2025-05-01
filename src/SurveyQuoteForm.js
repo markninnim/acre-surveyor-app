@@ -45,9 +45,13 @@ export default function SurveyQuoteForm() {
 
     setQuote(estimatedQuote);
 
-    // Create a FormData object to POST to FluentCRM
+    // Extract first name from full name
+    const firstName = formData.full_name.split(' ')[0];
+
+    // Prepare data for CRM webhook
     const data = new FormData();
     data.append('full_name', formData.full_name);
+    data.append('first_name', firstName);
     data.append('email', formData.email);
     data.append('phone', formData.phone);
     data.append('postcode', formData.postcode);
@@ -68,7 +72,6 @@ export default function SurveyQuoteForm() {
     setLoading(false);
   }
 };
-
 
   const logoUrl = "https://acresurveying.co.uk/wp-content/uploads/2025/02/acre-surveying-logo.png";
 
