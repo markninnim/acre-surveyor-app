@@ -25,6 +25,7 @@ const handleSubmit = async (e) => {
   console.log('Submitting form:', formData);
 
   try {
+    // Calculate estimated quote
     const propertyValue = parseInt(formData.value, 10);
     let estimatedQuote;
     if (propertyValue <= 100000) estimatedQuote = 299;
@@ -45,21 +46,24 @@ const handleSubmit = async (e) => {
 
     setQuote(estimatedQuote);
 
-    // Parse first name from full_name
-    const trimmedName = (formData.full_name || '').trim();
-    const firstName = trimmedName.split(' ')[0] || 'Customer';
+    // Prepare data for FluentCRM
+    const fullName = formData.full_name?.trim() || '';
+    const firstName = fullName.includes(' ') ? fullName.split(' ')[0] : fullName;
 
-    console.log("Extracted first name:", firstName);
-
-    // Build form data
     const data = new FormData();
-    data.append('full_name', formData.full_name);
+    data.append('full_name', fullName);
     data.append('first_name', firstName);
     data.append('email', formData.email);
     data.append('phone', formData.phone);
     data.append('postcode', formData.postcode);
     data.append('value', formData.value);
     data.append('surveyor', formData.surveyor);
+
+    console.log("Sending to CRM:", {
+      full_name: fullName,
+      first_name: firstName,
+      email: formData.email
+    });
 
     await fetch('https://acresurveying.co.uk/?fluentcrm=1&route=contact&hash=9d18b263-b9c2-44b5-8b0c-06b04b99e997', {
       method: 'POST',
@@ -75,7 +79,6 @@ const handleSubmit = async (e) => {
     setLoading(false);
   }
 };
-
 
 
   const logoUrl = "https://acresurveying.co.uk/wp-content/uploads/2025/02/acre-surveying-logo.png";
