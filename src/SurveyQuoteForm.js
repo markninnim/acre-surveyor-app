@@ -25,7 +25,6 @@ const handleSubmit = async (e) => {
   console.log('Submitting form:', formData);
 
   try {
-    // Calculate estimated quote
     const propertyValue = parseInt(formData.value, 10);
     let estimatedQuote;
     if (propertyValue <= 100000) estimatedQuote = 299;
@@ -46,13 +45,13 @@ const handleSubmit = async (e) => {
 
     setQuote(estimatedQuote);
 
-    // Extract first name from full name
-    const firstName = formData.full_name && formData.full_name.trim() !== ''
-      ? formData.full_name.trim().split(' ')[0]
-      : 'Customer';
-    console.log("First name for CRM:", firstName);
+    // Parse first name from full_name
+    const trimmedName = (formData.full_name || '').trim();
+    const firstName = trimmedName.split(' ')[0] || 'Customer';
 
-    // Prepare data for CRM
+    console.log("Extracted first name:", firstName);
+
+    // Build form data
     const data = new FormData();
     data.append('full_name', formData.full_name);
     data.append('first_name', firstName);
@@ -62,7 +61,6 @@ const handleSubmit = async (e) => {
     data.append('value', formData.value);
     data.append('surveyor', formData.surveyor);
 
-    // Send data to FluentCRM
     await fetch('https://acresurveying.co.uk/?fluentcrm=1&route=contact&hash=9d18b263-b9c2-44b5-8b0c-06b04b99e997', {
       method: 'POST',
       body: data,
