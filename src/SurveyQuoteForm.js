@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 export default function SurveyQuoteForm() {
-  const [formData, setFormData] = useState({
  const [formData, setFormData] = useState({
   first_name: '',
   last_name: '',
