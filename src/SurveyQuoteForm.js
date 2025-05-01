@@ -25,39 +25,36 @@ const handleSubmit = async (e) => {
   console.log('Submitting form:', formData);
 
   try {
-    // Extract first name safely from full name
-    const firstName = formData.full_name?.trim().split(' ')[0] || 'Customer';
-
     // Calculate estimated quote
     const propertyValue = parseInt(formData.value, 10);
-    let estimatedQuote = 'Price on application';
-    if (!isNaN(propertyValue)) {
-      if (propertyValue <= 100000) estimatedQuote = 299;
-      else if (propertyValue <= 200000) estimatedQuote = 349;
-      else if (propertyValue <= 300000) estimatedQuote = 399;
-      else if (propertyValue <= 400000) estimatedQuote = 449;
-      else if (propertyValue <= 500000) estimatedQuote = 499;
-      else if (propertyValue <= 600000) estimatedQuote = 549;
-      else if (propertyValue <= 700000) estimatedQuote = 599;
-      else if (propertyValue <= 800000) estimatedQuote = 649;
-      else if (propertyValue <= 900000) estimatedQuote = 699;
-      else if (propertyValue <= 1000000) estimatedQuote = 749;
-      else if (propertyValue <= 1250000) estimatedQuote = 799;
-      else if (propertyValue <= 1500000) estimatedQuote = 899;
-      else if (propertyValue <= 1750000) estimatedQuote = 949;
-      else if (propertyValue <= 2000000) estimatedQuote = 999;
-    }
+    let estimatedQuote;
+    if (propertyValue <= 100000) estimatedQuote = 299;
+    else if (propertyValue <= 200000) estimatedQuote = 349;
+    else if (propertyValue <= 300000) estimatedQuote = 399;
+    else if (propertyValue <= 400000) estimatedQuote = 449;
+    else if (propertyValue <= 500000) estimatedQuote = 499;
+    else if (propertyValue <= 600000) estimatedQuote = 549;
+    else if (propertyValue <= 700000) estimatedQuote = 599;
+    else if (propertyValue <= 800000) estimatedQuote = 649;
+    else if (propertyValue <= 900000) estimatedQuote = 699;
+    else if (propertyValue <= 1000000) estimatedQuote = 749;
+    else if (propertyValue <= 1250000) estimatedQuote = 799;
+    else if (propertyValue <= 1500000) estimatedQuote = 899;
+    else if (propertyValue <= 1750000) estimatedQuote = 949;
+    else if (propertyValue <= 2000000) estimatedQuote = 999;
+    else estimatedQuote = 'Price on application';
 
     setQuote(estimatedQuote);
 
-    // Create form data for FluentCRM webhook
+    // Extract first name from full name
+    const firstName = formData.full_name && formData.full_name.trim() !== ''
+      ? formData.full_name.trim().split(' ')[0]
+      : 'Customer';
+    console.log("First name for CRM:", firstName);
+
+    // Prepare data for CRM
     const data = new FormData();
     data.append('full_name', formData.full_name);
-    console.log("Full name submitted:", formData.full_name);
-const firstName = formData.full_name && formData.full_name.trim() !== ''
-  ? formData.full_name.trim().split(' ')[0]
-  : 'Customer';
-
     data.append('first_name', firstName);
     data.append('email', formData.email);
     data.append('phone', formData.phone);
@@ -65,10 +62,11 @@ const firstName = formData.full_name && formData.full_name.trim() !== ''
     data.append('value', formData.value);
     data.append('surveyor', formData.surveyor);
 
+    // Send data to FluentCRM
     await fetch('https://acresurveying.co.uk/?fluentcrm=1&route=contact&hash=9d18b263-b9c2-44b5-8b0c-06b04b99e997', {
       method: 'POST',
       body: data,
-      mode: 'no-cors',
+      mode: 'no-cors'
     });
 
     setSubmitted(true);
@@ -79,6 +77,7 @@ const firstName = formData.full_name && formData.full_name.trim() !== ''
     setLoading(false);
   }
 };
+
 
 
   const logoUrl = "https://acresurveying.co.uk/wp-content/uploads/2025/02/acre-surveying-logo.png";
