@@ -46,7 +46,8 @@ export default function SurveyQuoteForm() {
     setQuote(estimatedQuote);
 
     // Extract first name from full name
-    const firstName = formData.full_name.split(' ')[0];
+    data.append('first_name', formData.full_name ? formData.full_name.split(' ')[0] : '');
+
 
     // Prepare data for CRM webhook
     const data = new FormData();
